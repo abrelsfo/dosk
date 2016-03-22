@@ -15,9 +15,9 @@ function ls() {
   console.log('');
   for (key in commands) {
     if ({}.hasOwnProperty.call(commands, key)) {
-      console.log(key + '=' + commands[key].func);
+      console.log(chalk.green(key + '=' + commands[key].func));
       if (commands[key].desc !== undefined) {
-        console.log('::' + commands[key].desc);
+        console.log(chalk.yellow('::' + commands[key].desc));
       }
       console.log('');
     }
@@ -222,17 +222,7 @@ function writeToFile() {
       process.exit(1);
     }
     console.log(chalk.green('env.cmd has been updated'));
-    prompt.get(['Restart Prompt yes/no'], function (err, res) {
-      if (err) {
-        throw (err);
-      }
-
-      if (res.toLowerCase() === 'yes') {
-        shell.exec('cmd.exe');
-      } else if (res.toLowerCase() !== 'no') {
-        console.log(chalk.red('Answer should be yes or no. Type cmd.exe to restart manually'));
-      }
-    });
+    console.log(chalk.green('Type cmd.exe to restart prompt'));
   });
 }
 

@@ -20,8 +20,9 @@ var cli = meow([
   '  --echo turn echo on/off with input on/off.  Off by default',
   '',
   'Examples',
-  '  $ dosk -a md "mkdir $1$tcd $1"',
+  '  $ dosk -a md "mkdir \"$*\"$tcd \"$*\""',
   '    creates a new alias called md which makes a new directory and changes to that directory',
+  '    Use \ to escape quotes',
   '',
   '  $ dosk -a ls "dir /B" "Lists the directories without excessive information"',
   '    Creates a new alias ls with the description "Lists the directories without excessive information"',
@@ -59,7 +60,7 @@ var cli = meow([
 
 updateNotifier({pkg: cli.pkg}).notify();
 var flag = Object.keys(cli.flags)[0];
-console.log(flag);
+
 if (Object.keys(cli.flags).length !== 1) {
   console.error(chalk.red('dosk expected 1 flag, got ' + Object.keys(cli.flags).length));
   console.log(cli.help);
