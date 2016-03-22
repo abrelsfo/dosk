@@ -2,7 +2,6 @@
 var chalk = require('chalk');
 var fs = require('fs');
 var shell = require('shelljs');
-var prompt = require('prompt');
 var doskeys;
 var commands = {};
 var other = [];
