@@ -98,7 +98,7 @@ You can do that by going typing \'regedit\' in start. Then going to
 HKEY_CURRENT_USER->Software->Microsoft->Command Processor
 Add a new String Value with
  Name: AutoRun
- Data: C:\\Windows\\System32\\env.cmd
+ Data: C:\Windows\System32\env.cmd
 ```
 
 ## Useful Aliases
