@@ -5,6 +5,7 @@ var shell = require('shelljs');
 var prompt = require('prompt');
 var doskeys;
 var commands = {};
+var other = [];
 var ecko = 'off';
 var key;
 var i;
@@ -75,9 +76,7 @@ function openFile(input, flag) {
     for (i = 0; i < data.length; i++) {
       if (data[i].startsWith('@echo')) {
         ecko = data[i].slice(6, data[i].length);
-      }
-
-      if (data[i].startsWith('DOSKEY')) {
+      } else if (data[i].startsWith('DOSKEY')) {
         var line = data[i].slice(7, data[i].length).split('=');
         key = line[0];
         if (key in commands) {
@@ -85,10 +84,10 @@ function openFile(input, flag) {
         } else {
           commands[key] = {func: line[1], desc: undefined};
         }
-      }
-
-      if (data[i].startsWith('::')) {
-        commands[key].desc = data[i].slice(2, data[i].length);
+      } else if (data[i].startsWith('::')) {
+        commands[key].desc += data[i].slice(2, data[i].length);
+      } else {
+        other.push(data[i]);
       }
     }
 
@@ -139,7 +138,11 @@ function add(input) {
   if (input[0] in commands) {
     console.error(chalk.red(input[0] + ' is already an alias'));
   } else {
-    commands[input[0]] = {func: input[1], desc: input[2]};
+    if (input[2] === undefined) {
+      commands[input[0]] = {func: input[1], desc: ''};
+    } else {
+      commands[input[0]] = {func: input[1], desc: input[2]};
+    }
     console.log(chalk.green('Added alias ' + input[0]));
     writeToFile();
   }
@@ -208,12 +211,17 @@ function writeToFile() {
   for (key in commands) {
     if ({}.hasOwnProperty.call(commands, key)) {
       doskeys += 'DOSKEY ' + key + '=' + commands[key].func + '\n';
-      if (commands[key].desc !== undefined) {
+      if (commands[key].desc !== '') {
         doskeys += '::' + commands[key].desc + '\n';
       }
       doskeys += '\n';
     }
   }
+
+  for (i = 0; i < other.length; i++) {
+    doskeys += other[i] + '\n';
+  }
+
   doskeys = doskeys.replace(/\n/g, '\r\n');
 
   fs.writeFile('C:/Windows/System32/env.cmd', doskeys, {flags: 'w'}, function (err) {

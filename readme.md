@@ -114,11 +114,9 @@ c=cls
 md=mkdir "&*"$tcd "$*"
 ::Make a new directory and immediately switch to it
 
-res=start cmd.exe & exit
-::Restart the command prompt. Useful for new changes to take effect
-::If you have changed the cmd prompt properties and they do not take
-::affect then you will have to set them again in the window that just
-::opened, but it should be permanent from there
+res=cmd.exe
+::Start another instance of cmd.exe inside current window.
+::Useful for new changes to take effect
 ```
 
 If anyone has more useful aliases that they use regularly then create an issue and I'll add them
