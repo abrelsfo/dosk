@@ -95,7 +95,7 @@ Examples
 
 Due to security concerns these changes are made permanent manually.
 To make these changes permanent you need to edit the registry.
-You can do that by going typing \'regedit\' in start. Then going to
+You can do that by going typing 'regedit' in start. Then going to
 HKEY_CURRENT_USER->Software->Microsoft->Command Processor
 Add a new String Value with
  Name: AutoRun
