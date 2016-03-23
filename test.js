@@ -1,3 +1,13 @@
 var dosk = require('./');
-
-dosk(['ls', 'dir /B', 'Print files without the extra bloat'], 'a');
+var chalk = require('chalk');
+console.log(chalk.blue('Created env.cmd\n'));
+console.log(chalk.yellow('======================================================================'));
+console.log(chalk.cyan(' Due to security concerns these changes are made permanent manually'));
+console.log(chalk.cyan(' To make these changes permanent you need to edit the registry'));
+console.log(chalk.cyan(' You can do that by going typing regedit in start. Then going to'));
+console.log(chalk.green('  HKEY_CURRENT_USER->Software->Microsoft->Command Processor'));
+console.log(chalk.cyan(' Add a new String Value with'));
+console.log(chalk.green('  Name: AutoRun'));
+console.log(chalk.green('  Data: C:\\Windows\\System32\\env.cmd'));
+console.log(chalk.cyan(' After that, restart the command prompt for changes to take effect'));
+console.log(chalk.yellow('======================================================================'));

@@ -46,16 +46,16 @@ function makeFile(input, flag) {
       console.error(chalk.red('Error creating env.cmd'));
       process.exit(1);
     }
-    console.log(chalk.blue('Created env.cmd\n'));
+    console.log(chalk.cyan('Created env.cmd\n'));
     console.log(chalk.yellow('======================================================================'));
-    console.log(chalk.green(' Due to security concerns these changes are made permanent manually'));
-    console.log(chalk.green(' To make these changes permanent you need to edit the registry'));
-    console.log(chalk.green(' You can do that by going typing regedit in start. Then going to'));
+    console.log(chalk.cyan(' Due to security concerns these changes are made permanent manually'));
+    console.log(chalk.cyan(' To make these changes permanent you need to edit the registry'));
+    console.log(chalk.cyan(' You can do that by going typing regedit in start. Then going to'));
     console.log(chalk.green(' HKEY_CURRENT_USER->Software->Microsoft->Command Processor'));
-    console.log(chalk.green(' Add a new String Value with'));
+    console.log(chalk.cyan(' Add a new String Value with'));
     console.log(chalk.green(' Name: AutoRun'));
     console.log(chalk.green(' Data: C:\\Windows\\System32\\env.cmd'));
-    console.log(chalk.green(' After that, restart the command prompt for changes to take effect'));
+    console.log(chalk.cyan(' After that, restart the command prompt for changes to take effect'));
     console.log(chalk.yellow('======================================================================'));
     openFile(input, flag);
   });
@@ -143,7 +143,7 @@ function add(input) {
     } else {
       commands[input[0]] = {func: input[1], desc: input[2]};
     }
-    console.log(chalk.green('Added alias ' + input[0]));
+    console.log(chalk.cyan('Added alias ' + input[0]));
     writeToFile();
   }
 }
@@ -154,7 +154,7 @@ function ec(input) {
   if (input[0] in commands) {
     var old = commands[input[0]].func;
     commands[input[0]].func = input[1];
-    console.log(chalk.green('Changed ' + input[0] + 'from "' + old + '" to "' + input[1] + '"'));
+    console.log(chalk.cyan('Changed ' + input[0] + ' from "' + old + '" to "' + input[1] + '"'));
     writeToFile();
   } else {
     console.error(chalk.red(input[0] + ' is not an alias'));
@@ -167,7 +167,7 @@ function en(input) {
   if (input[0] in commands) {
     commands[input[1]] = commands[input[0]];
     delete commands[input[0]];
-    console.log(chalk.green('changed ' + input[0] + ' to ' + input[1]));
+    console.log(chalk.cyan('changed ' + input[0] + ' to ' + input[1]));
     writeToFile();
   } else {
     console.error(chalk.red(input[0] + ' is not an alias'));
@@ -185,7 +185,7 @@ function em() {
 function ed(input) {
   if (input[0] in commands) {
     commands[input[0]].desc = input[1];
-    console.log(chalk.green('changed ' + input[0] + ' description to ' + input[1]));
+    console.log(chalk.cyan('changed ' + input[0] + ' description to ' + input[1]));
     writeToFile();
   } else {
     console.error(chalk.red(input[0] + ' is not an alias'));
@@ -197,7 +197,7 @@ function ed(input) {
 function echo(input) {
   if (input[0].toLowerCase() === 'on' || input[0].toLowerCase() === 'off') {
     ecko = input[0].toLowerCase();
-    console.log(chalk.green('echo set to ' + input[0]));
+    console.log(chalk.cyan('echo set to ' + input[0]));
     writeToFile();
   } else {
     console.error(chalk.red('echo expected on or off, got ' + input[0]));
@@ -229,8 +229,8 @@ function writeToFile() {
       console.error(chalk.red('Error writing to env.cmd'));
       process.exit(1);
     }
-    console.log(chalk.green('env.cmd has been updated'));
-    console.log(chalk.green('Type cmd.exe to restart prompt'));
+    console.log(chalk.cyan('env.cmd has been updated'));
+    console.log(chalk.cyan('Type cmd.exe to restart prompt'));
   });
 }
 
