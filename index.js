@@ -14,13 +14,12 @@ var i;
 function ls() {
   console.log('');
   for (key in commands) {
-    if ({}.hasOwnProperty.call(commands, key)) {
-      console.log(chalk.green(key + '=' + commands[key].func));
-      if (commands[key].desc !== undefined) {
-        console.log(chalk.yellow('::' + commands[key].desc));
-      }
-      console.log('');
+    console.log(chalk.green(key + '=' + commands[key].func));
+    if (commands[key].desc !== undefined) {
+      console.log(chalk.yellow('::' + commands[key].desc));
     }
+    console.log('');
+
   }
 }
 
@@ -70,8 +69,10 @@ function openFile(input, flag) {
       throw err;
     }
 
-    data = data.replace('\r\n', '\n');
+    data = data.replace(/\r\n/g, '\n');
+    data = data.replace(/\r/g, '');
     data = data.split('\n');
+
     for (i = 0; i < data.length; i++) {
       if (data[i].startsWith('@echo')) {
         ecko = data[i].slice(6, data[i].length);
@@ -84,7 +85,7 @@ function openFile(input, flag) {
           commands[key] = {func: line[1], desc: undefined};
         }
       } else if (data[i].startsWith('::')) {
-        commands[key].desc += data[i].slice(2, data[i].length);
+        commands[key].desc = data[i].slice(2, data[i].length);
       } else {
         other.push(data[i]);
       }
@@ -210,7 +211,7 @@ function writeToFile() {
   for (key in commands) {
     if ({}.hasOwnProperty.call(commands, key)) {
       doskeys += 'DOSKEY ' + key + '=' + commands[key].func + '\n';
-      if (commands[key].desc !== '') {
+      if (commands[key].desc !== '' && commands[key].desc !== undefined) {
         doskeys += '::' + commands[key].desc + '\n';
       }
       doskeys += '\n';
