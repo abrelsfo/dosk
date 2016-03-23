@@ -1,6 +1,6 @@
 {
   "name": "dosk",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Quickly add, describe, and list Windows cmd prompt aliases",
   "license": "MIT",
   "repository": "abrelsfo/dosk",

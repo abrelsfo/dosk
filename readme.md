@@ -64,33 +64,33 @@ Options
   --echo turn echo on/off with input on/off.  Off by default
 
 Examples
-  $ dosk -a md "mkdir \"$*\"$tcd \"$*\""
+  $ dosk md "mkdir \"$*\"$tcd \"$*\"" -a
     creates a new alias called md which makes a new directory and changes to that directory
     Use \ to escape quotes
 
-  $ dosk -a ls "dir /B" "Lists the directories without excessive information"
+  $ dosk ls "dir /B" "Lists the directories without excessive information" -a
     Creates a new alias ls with the description "Lists the directories without excessive information"
     description must come last
 
-  $ dosk -r ls
+  $ dosk ls -r
     Removes the alias ls from the list
 
   $ dosk -l
     lists the alaises in the .cmd file
 
-  $ dosk -e ls dir
+  $ dosk ls dir -e
     change the command to dir
 
-  $ dosk -en ls list
+  $ dosk ls list --en
     Rename ls to list
 
-  $ dosk -ed ls "list directories and files"
+  $ dosk ls "list directories and files" --ed
     change the description of ls to "list directories and files"
 
-  $ dosk -em
+  $ dosk --em
     Opens the .cmd file for manual editing
 
-  $ dosk echo on
+  $ dosk on --echo
     Turns echo on
 
 Due to security concerns these changes are made permanent manually.
